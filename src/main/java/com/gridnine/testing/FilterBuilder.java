@@ -25,11 +25,13 @@ class FilterBuilder {
                 return flight -> {
                     List<Segment> segments = flight.getSegments();
                     long groundTime = 0;
+
                     for (int i = 0; i < segments.size() - 1; ++i) {
                         LocalDateTime prevArrival = segments.get(i).getArrivalDate();
                         LocalDateTime nextDeparture = segments.get(i + 1).getDepartureDate();
                         groundTime += ChronoUnit.HOURS.between(prevArrival, nextDeparture);
                     }
+
                     return groundTime <= 2;
                 };
             default:

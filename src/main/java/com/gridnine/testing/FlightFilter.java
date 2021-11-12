@@ -12,6 +12,7 @@ class FlightFilter {
         if (flights == null || filter == null)
             throw new NullPointerException(
                     "parameters can not be null");
+
         return flights.parallelStream()
                 .filter(filter)
                 .collect(Collectors.toList());
@@ -21,9 +22,9 @@ class FlightFilter {
         if (flights == null || filters == null)
             throw new NullPointerException(
                     "parameters can not be null");
+
         Predicate<Flight> filter = filters.stream()
-                .reduce(Predicate::and)
-                .orElse(x -> true);
+                .reduce(x -> true, Predicate::and);
         return FlightFilter.apply(flights, filter);
     }
 }

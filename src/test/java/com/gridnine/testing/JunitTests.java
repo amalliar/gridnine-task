@@ -22,6 +22,7 @@ public class JunitTests {
         expected.remove(2);
         List<Flight> actual = FlightFilter.apply(flights,
                 FilterBuilder.createFilter("departsAfterCurrentTime"));
+
         assertThat(expected, is(actual));
     }
 
@@ -32,6 +33,7 @@ public class JunitTests {
         expected.remove(3);
         List<Flight> actual = FlightFilter.apply(flights,
                 FilterBuilder.createFilter("departsBeforeArrivalTime"));
+
         assertThat(expected, is(actual));
     }
 
@@ -42,6 +44,7 @@ public class JunitTests {
         expected = expected.subList(0, 4);
         List<Flight> actual = FlightFilter.apply(flights,
                 FilterBuilder.createFilter("groundTimeLessOrEqualsTwoHours"));
+
         assertThat(expected, is(actual));
     }
 
@@ -56,6 +59,7 @@ public class JunitTests {
                         FilterBuilder.createFilter("departsBeforeArrivalTime"),
                         FilterBuilder.createFilter("groundTimeLessOrEqualsTwoHours")
                         ));
+
         assertThat(expected, is(actual));
     }
 
@@ -64,6 +68,7 @@ public class JunitTests {
     void testEmptyFilterList() {
         List<Flight> expected = new LinkedList<>(flights);
         List<Flight> actual = FlightFilter.apply(flights, List.of());
+
         assertThat(expected, is(actual));
     }
 
@@ -72,6 +77,7 @@ public class JunitTests {
     void testEmptyFlightList() {
         List<Flight> expected = List.of();
         List<Flight> actual = FlightFilter.apply(List.of(), List.of());
+
         assertThat(expected, is(actual));
     }
 
@@ -80,6 +86,7 @@ public class JunitTests {
     void testNullFlightList() {
         Exception ex = Assertions.assertThrows(NullPointerException.class,
                 () -> FlightFilter.apply(null, List.of()));
+
         assertThat("parameters can not be null", is(ex.getMessage()));
     }
 
@@ -88,6 +95,7 @@ public class JunitTests {
     void testNullFilter() {
         Exception ex = Assertions.assertThrows(NullPointerException.class,
                 () -> FlightFilter.apply(flights, (Predicate<Flight>) null));
+
         assertThat("parameters can not be null", is(ex.getMessage()));
     }
 
@@ -96,6 +104,7 @@ public class JunitTests {
     void testUnknownFilter() {
         Exception ex = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> FilterBuilder.createFilter("random"));
+
         assertThat("unknown filter: random", is(ex.getMessage()));
     }
 }

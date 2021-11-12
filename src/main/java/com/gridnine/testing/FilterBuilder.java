@@ -9,6 +9,12 @@ import java.util.function.Predicate;
  * Factory class to get required filters.
  */
 class FilterBuilder {
+
+    /**
+     * A method for creating the requested filter based on its name.
+     * @param filter String name of the requested filter.
+     * @return Predicate filter.
+     */
     static Predicate<Flight> createFilter(final String filter) {
         switch (filter) {
             case "departsAfterCurrentTime":

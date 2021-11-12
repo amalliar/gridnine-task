@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class JunitTests {
+public class FlightFilterTests {
     final List<Flight> flights = FlightBuilder.createFlights();
 
     @Test
